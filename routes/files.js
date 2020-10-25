@@ -95,7 +95,7 @@ router.post('/sendmail', async (req, res) => {
         sender,
         downloadLink: `${process.env.APP_BASE_URL}/files/${file.uuid}?source=email`,
         size: parseInt(file.size / 1000) + ' KB',
-        siteLink: rocess.env.APP_BASE_URL,
+        siteLink: process.env.APP_BASE_URL,
         expires: '24 hours'
       })
     }).then(() => {
