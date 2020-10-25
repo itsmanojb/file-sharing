@@ -22,9 +22,8 @@ const fileSchema = new Schema({
     type: String,
     required: false
   },
-  recipient: {
-    type: String,
-    required: false
+  recipients: {
+    type: [String],
   },
 }, {
   timestamps: true

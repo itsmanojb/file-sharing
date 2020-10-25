@@ -69,15 +69,22 @@ router.post('/sendmail', async (req, res) => {
     const file = await File.findOne({
       uuid: uuid
     });
-    if (file.sender) {
-      return res.status(422).send({
-        error: 'Email already sent once.'
-      });
-    }
-    file.sender = sender;
-    file.recipient = recipient;
-    await file.save();
 
+    if (!file.sender) {
+      file.sender = sender;
+      file.recipients = [recipient];
+    } else {
+
+      if (file.recipients.includes(recipient)) {
+        return res.status(422).send({
+          error: `Email already sent to ${recipient}.`
+        });
+      } else {
+        file.recipients.push(recipient);
+      }
+    }
+
+    await file.save();
     const sendMail = require('../services/emailService');
     sendMail({
       from: sender,
@@ -88,6 +95,7 @@ router.post('/sendmail', async (req, res) => {
         sender,
         downloadLink: `${process.env.APP_BASE_URL}/files/${file.uuid}?source=email`,
         size: parseInt(file.size / 1000) + ' KB',
+        siteLink: rocess.env.APP_BASE_URL,
         expires: '24 hours'
       })
     }).then(() => {
