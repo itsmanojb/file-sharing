@@ -1,0 +1,21 @@
+{
+  "name": "file-sharing",
+  "version": "1.0.0",
+  "description": "file sharing application",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": {
+    "name": "Manoj Barman",
+    "url": "https://manojbarman.in"
+  },
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.17.1"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.6"
+  }
+}
