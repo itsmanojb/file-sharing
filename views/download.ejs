@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>File Share</title>
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+
+<body>
+  <% if(locals.error) {%>
+  <% } else {%>
+  File ready!
+  <h2><%= filename %></h2>
+  <p><%= parseInt(size/1000) %> KB</p>
+  <a href="<%= downloadLink %>">Download</a>
+  <% }%>
+</body>
+
+</html>
