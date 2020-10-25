@@ -118,3 +118,6 @@ dist
 
 # IDE
 .vscode
+
+# Disk storage
+uploads/*
