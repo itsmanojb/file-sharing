@@ -4,7 +4,8 @@
   "description": "file sharing application",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "dev": "nodemon server.js",
+    "serve": "node server.js"
   },
   "keywords": [],
   "author": {
@@ -13,7 +14,9 @@
   },
   "license": "ISC",
   "dependencies": {
-    "express": "^4.17.1"
+    "dotenv": "^8.2.0",
+    "express": "^4.17.1",
+    "mongoose": "^5.10.10"
   },
   "devDependencies": {
     "nodemon": "^2.0.6"
