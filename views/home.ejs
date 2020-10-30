@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>FileShare - Upload, Share your files</title>
+
+  <link rel="apple-touch-icon" href="/apple-icon.png">
+  <link rel="icon" type="image/png" href="/favicon.png">
+
+  <link rel="stylesheet" href="/css/style.min.css">
+</head>
+
+<body>
+  <section class="upload-container">
+    <div class="dropzone">
+      <div class="wrapper">
+        <div class="files-icon">
+          <img src="/img/file.png" class="left" alt="">
+          <img src="/img/file.png" class="center" alt="">
+          <img src="/img/file.png" class="right" alt="">
+        </div>
+        <input type="file" id="fileInput">
+        <div class="text">Drop your files here <small>or</small> <span role="button" id="fileSelectBtn">Browse</span>
+        </div>
+      </div>
+    </div>
+  </section>
+  <section class="uploader-progress-ui">
+    <div class="progress-bar">
+      <span class="bar">
+        <span class="progress" id="progressBar"></span>
+      </span>
+    </div>
+  </section>
+  <section class="postupload-ui">
+    <div class="wrapper">
+      <div class="checkmark">
+        <svg xmlns="http://www.w3.org/2000/svg" class="svg-success" viewBox="0 0 24 24">
+          <g stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10">
+            <circle class="success-circle-outline" cx="12" cy="12" r="11.5" />
+            <circle class="success-circle-fill" cx="12" cy="12" r="11.5" />
+            <polyline class="success-tick" points="17,8.5 9.5,15.5 7,13" />
+          </g>
+        </svg>
+      </div>
+      <div class="complete-text will-fade-in"></div>
+      <div class="share-link will-fade-in anim-delay-1">
+        <input type="text" id="fileURL" readonly value="Here's the file link">
+        <div class="btns">
+          <button type="button" title="Copy" class="copy" id="copyURLBtn"><span>copy</span></button>
+          <button type="button" title="Email" class="mail" id="emailBtn"><span>mail</span></button>
+        </div>
+      </div>
+      <form>
+        <div class="email-form" id="emailForm">
+          <input type="email" name="mail_to" id="emailTo">
+          <input type="email" name="mail_from" id="emailFrom">
+          <button type="submit"><span>Send</span></button>
+        </div>
+      </form>
+    </div>
+  </section>
+  <div class="toast"></div>
+  <script src="/js/app.js"></script>
+</body>
+
+</html>

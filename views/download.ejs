@@ -4,18 +4,30 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>File Share</title>
-  <link rel="stylesheet" href="/css/style.css">
+  <title>FileShare - Download shared file</title>
+
+  <link rel="apple-touch-icon" href="/apple-icon.png">
+  <link rel="icon" type="image/png" href="/favicon.png">
+
+  <link rel="stylesheet" href="/css/style.min.css">
 </head>
 
 <body>
-  <% if(locals.error) {%>
-  <% } else {%>
-  File ready!
-  <h2><%= filename %></h2>
-  <p><%= parseInt(size/1000) %> KB</p>
-  <a href="<%= downloadLink %>">Download</a>
-  <% }%>
+  <section class="download-container">
+    <% if(locals.error) {%>
+    <div class="wrapper error">
+      <h4><%= locals.error %> </h4>
+      <p>Requested file link may have been modifed or expired. <br>Ask sender to share the file again.</p>
+    </div>
+    <% } else {%>
+    <div class="wrapper success">
+      <!-- <div class="icon"></div> -->
+      <h4>Ready for download!</h4>
+      <p>Download link will expire in 24 hours after it's shared for the first time.</p>
+      <a class="btn" href="<%= downloadLink %>">Download (<%= parseInt(size/1000) %> KB) </a>
+      <% }%>
+    </div>
+  </section>
 </body>
 
 </html>
