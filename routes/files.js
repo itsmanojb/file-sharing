@@ -25,7 +25,6 @@ router.post('/', (req, res) => {
 
   upload(req, res, async (err) => {
 
-    // Validate 
     if (!req.file) {
       return res.status(400).json({
         error: 'File missing'
@@ -50,9 +49,71 @@ router.post('/', (req, res) => {
     })
 
   })
+})
 
+router.post('/sendmail', async (req, res) => {
 
-  // Response -> link
+  const {
+    uuid,
+    sender,
+    recipient
+  } = req.body;
+
+  if (!uuid || !sender || !recipient) {
+    return res.status(400).send({
+      error: 'Missing required fields'
+    })
+  }
+
+  try {
+    const file = await File.findOne({
+      uuid: uuid
+    });
+
+    if (!file.sender) {
+      file.sender = sender;
+      file.recipients = [recipient];
+    } else {
+
+      if (file.recipients.includes(recipient)) {
+        return res.status(422).send({
+          error: `Email already sent to ${recipient}.`
+        });
+      } else {
+        file.recipients.push(recipient);
+      }
+    }
+
+    await file.save();
+    const sendMail = require('../services/emailService');
+    sendMail({
+      from: sender,
+      to: recipient,
+      subject: 'New Shared File',
+      text: `${sender} shared a file with you.`,
+      html: require('../services/emailTemplate')({
+        sender,
+        downloadLink: `${process.env.APP_BASE_URL}/files/${file.uuid}?source=email`,
+        size: parseInt(file.size / 1000) + ' KB',
+        siteLink: process.env.APP_BASE_URL,
+        expires: '24 hours'
+      })
+    }).then(() => {
+      return res.json({
+        success: true
+      });
+    }).catch(err => {
+      consolelog(err)
+      return res.status(500).json({
+        error: 'Error in email sending.'
+      });
+    });
+  } catch (err) {
+    console.log(err)
+    return res.status(500).send({
+      error: 'Something went wrong.'
+    });
+  }
 
 })
 
