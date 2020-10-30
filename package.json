@@ -4,10 +4,10 @@
   "description": "file sharing application",
   "main": "index.js",
   "scripts": {
-    "dev": "nodemon server.js",
-    "serve": "node server.js"
+    "start": "node server.js",
+    "dev": "nodemon server.js"
   },
-  "keywords": [],
+  "keywords": ["file-share", "nodejs"],
   "author": {
     "name": "Manoj Barman",
     "url": "https://manojbarman.in"
