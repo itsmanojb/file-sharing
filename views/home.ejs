@@ -54,11 +54,11 @@
           <button type="button" title="Email" class="mail" id="emailBtn"><span>mail</span></button>
         </div>
       </div>
-      <form>
+      <form id="mailForm" method="POST">
         <div class="email-form" id="emailForm">
-          <input type="email" name="mail_to" id="emailTo">
-          <input type="email" name="mail_from" id="emailFrom">
-          <button type="submit"><span>Send</span></button>
+          <input type="email" autocomplete="off" name="mail_to" id="emailTo" placeholder="Recipient's email" required>
+          <input type="email" autocomplete="off" name="mail_from" id="emailFrom" placeholder="Your email" required>
+          <button type="submit" id="emailSendBtn"><span>Send</span></button>
         </div>
       </form>
     </div>

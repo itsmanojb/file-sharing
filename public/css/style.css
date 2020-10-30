@@ -436,7 +436,6 @@ screen and (-ms-high-contrast: none) {
 }
 
 .email-form {
-    display: flex;
     flex-direction: column;
     align-items: center;
     padding: 15px;
@@ -496,6 +495,11 @@ screen and (-ms-high-contrast: none) {
 .email-form button:hover {
     border-color: var(--app-color-hover);
     background: var(--app-color-hover);
+}
+
+.email-form button:disabled {
+    pointer-events: none;
+    opacity: 0.5;
 }
 
 .toast {
