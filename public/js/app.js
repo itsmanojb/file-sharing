@@ -13,7 +13,9 @@ const sharingContainer = document.querySelector(".sharing-container");
 const copyURLBtn = document.getElementById("copyURLBtn");
 const fileURL = document.getElementById("fileURL");
 const emailBtn = document.getElementById("emailBtn");
-const emailForm = document.getElementById("emailForm");
+const emailFormContainer = document.getElementById("emailForm");
+const emailForm = document.getElementById("mailForm");
+const emailSendBtn = document.getElementById("emailSendBtn");
 const toast = document.querySelector(".toast");
 
 const maxAllowedSize = 50 * 1024 * 1024; // 50MB
@@ -44,7 +46,7 @@ dropzone.addEventListener('drop', (e) => {
             showToast("Max file size is 50MB");
         }
     } else if (files.length > 1) {
-        showToast('Multiple file upload not supported yet.');
+        showToast('Multiple file upload not supported');
     }
 })
 
@@ -123,7 +125,47 @@ fileURL.addEventListener("click", () => {
 });
 
 emailBtn.addEventListener("click", () => {
-    emailForm.style.display = 'flex'
+    emailFormContainer.style.display = 'flex'
+});
+
+emailForm.addEventListener("submit", (e) => {
+    e.preventDefault(); // stop submission
+
+    emailSendBtn.setAttribute("disabled", "disabled");
+    emailSendBtn.innerHTML = "<span>Sending..</span>";
+
+    const url = fileURL.value;
+
+    const formData = {
+        uuid: url.split("/").splice(-1, 1)[0],
+        recipient: emailForm.elements["mail_to"].value,
+        sender: emailForm.elements["mail_from"].value,
+    };
+
+    fetch('/api/files/sendmail', {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify(formData),
+        })
+        .then((res) => res.json())
+        .then((data) => {
+            if (data.success) {
+                showToast("Email successfully sent");
+                document.getElementById('emailTo').value = '';
+                emailSendBtn.innerHTML = "<span>Send</span>";
+                emailSendBtn.removeAttribute("disabled");
+            } else {
+                showToast("Something went wrong");
+                emailSendBtn.innerHTML = "<span>Retry</span>";
+                emailSendBtn.removeAttribute("disabled");
+            }
+        }).catch(() => {
+            showToast("Something went wrong");
+            emailSendBtn.innerHTML = "<span>Send</span>";
+            emailSendBtn.removeAttribute("disabled");
+        })
 });
 
 let toastTimer;
