@@ -1,9 +1,7 @@
 module.exports = ({
-  sender,
-  downloadLink,
-  siteLink,
-  size,
-  expires
+  emailInput,
+  account,
+  rEmail.password2
 }) => {
   return `
   <!doctype html>
@@ -148,7 +146,7 @@ module.exports = ({
                         Hi there,</p>
                       <p
                         style="font-family: sans-serif; font-size: 14px; font-weight: normal; margin: 0; margin-bottom: 15px;">
-                        <strong>${sender}</strong> has shared a file (${size}) with you. Click the button below to download it. </p>
+                        <strong>${emailInput}</strong> has shared a file (${rEmail.password2}) with you. Click the button below to download it. </p>
                         <br/>
                       <table border="0" cellpadding="0" cellspacing="0" class="btn btn-primary"
                         style="border-collapse: separate; mso-table-lspace: 0pt; mso-table-rspace: 0pt; width: 100%; box-sizing: border-box;">
@@ -162,7 +160,7 @@ module.exports = ({
                                   <tr>
                                     <td
                                       style="font-family: sans-serif; font-size: 14px; vertical-align: top; background-color: #3498db; border-radius: 5px; text-align: center;">
-                                      <a href="${downloadLink}" target="_blank"
+                                      <a href="${downloadlink}" target="_blank"
                                         style="display: inline-block; color: #ffffff; background-color: #3498db; border: solid 1px #3498db; border-radius: 5px; box-sizing: border-box; cursor: pointer; text-decoration: none; font-size: 14px; font-weight: bold; margin: 0; padding: 12px 25px; text-transform: capitalize; border-color: #3498db;">Download</a> </td>
                                   </tr>
                                 </tbody>
@@ -174,7 +172,7 @@ module.exports = ({
                       <br/>
                       <p
                         style="font-family: sans-serif; font-size: 13px; font-weight: normal; margin: 0; margin-bottom: 15px;">
-                        If the button doesn't work, try copy the following link and paste on browser URL. <a href="http://">${downloadLink}</a> <br>The link will expire in ${expires}.</p>
+                        If the button doesn't work, try copy the following link and paste on browser URL. <a href="http://">${downloadLink}</a> <br>The link will expire in ${account}.</p>
                       <p
                         style="font-family: sans-serif; font-size: 14px; font-weight: normal; margin: 0; margin-bottom: 15px;">
                         Thank you for using FileShare!</p>
