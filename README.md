@@ -10,4 +10,4 @@ Shareable link will be generated and anyone with the link can download the file 
 - File size limit : 50 MB maximum
 - Single file upload only
 
-![ScreenShot](/screenshot.png?raw=true "")
+![ScreenShot](/screenshot.png?raw=true)
