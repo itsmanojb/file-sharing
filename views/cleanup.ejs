@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>FileShare - Clean Up</title>
+
+  <link rel="apple-touch-icon" href="/apple-icon.png">
+  <link rel="icon" type="image/png" href="/favicon.png">
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico">
+  <link rel="stylesheet" href="/css/style.min.css">
+</head>
+
+<body>
+  <div class="block-message">
+    <h4>Clean Up Done!</h4>
+    <p style="text-align: center;">
+      <%=locals.message %>
+      <% if(locals.totalFiles == 0) { %>
+        <br><br><small style="opacity: 0.6;">Only files uploaded more that 24 hours ago can be cleaned.</small>
+        <% } %>
+      </p>
+    <button onclick="gotoHome()">Go to Home</button>
+  </div>
+
+  <script>
+    function gotoHome() {
+      window.location.href = '/'
+    }
+  </script>
+</body>
+
+</html>

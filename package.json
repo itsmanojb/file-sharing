@@ -7,7 +7,10 @@
     "start": "node server.js",
     "dev": "nodemon server.js"
   },
-  "keywords": ["file-share", "nodejs"],
+  "keywords": [
+    "file-share",
+    "nodejs"
+  ],
   "author": {
     "name": "Manoj Barman",
     "url": "https://manojbarman.in"
@@ -21,6 +24,7 @@
     "mongoose": "^5.10.10",
     "multer": "^1.4.2",
     "nodemailer": "^6.4.16",
+    "timeago.js": "^4.0.2",
     "uuid": "^8.3.1"
   },
   "devDependencies": {

@@ -25,6 +25,11 @@ const fileSchema = new Schema({
   recipients: {
     type: [String],
   },
+  // status: {
+  //   type: String,
+  //   enum: ['uploaded', 'deleted'],
+  //   default : 'uploaded'
+  // }
 }, {
   timestamps: true
 })

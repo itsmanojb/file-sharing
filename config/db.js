@@ -6,17 +6,17 @@ function connectDB() {
   const connectionString = process.env.MONGODB_CONNECTION_URL;
   mongoose.connect(
     connectionString, {
-      useNewUrlParser: true,
-      useUnifiedTopology: true,
-      useFindAndModify: false,
-      useCreateIndex: true
-    }
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+    useFindAndModify: false,
+    useCreateIndex: true
+  }
   );
 
   const connection = mongoose.connection;
   connection.once('open', () => {
-      console.log(`Database connected`);
-    })
+    console.log(`Database connected`);
+  })
     .catch((err) => {
       console.log('Database connection failed', err);
       process.exit(1);

@@ -16,9 +16,12 @@ const emailBtn = document.getElementById("emailBtn");
 const emailFormContainer = document.getElementById("emailForm");
 const emailForm = document.getElementById("mailForm");
 const emailSendBtn = document.getElementById("emailSendBtn");
+const goBackBtn = document.getElementById("goBackBtn");
 const toast = document.querySelector(".toast");
 
-const maxAllowedSize = 50 * 1024 * 1024; // 50MB
+const cleanupBtn = document.querySelector("#cleanup-btn");
+
+const maxAllowedSize = 100 * 1024 * 1024; // 100MB
 
 window.addEventListener('DOMContentLoaded', (event) => {
     anims.forEach(el => el.classList.remove('fade-in'))
@@ -43,7 +46,7 @@ dropzone.addEventListener('drop', (e) => {
             fileInput.files = files
             uploadFile()
         } else {
-            showToast("Max file size is 50MB");
+            showToast("Max file size is 100MB");
         }
     } else if (files.length > 1) {
         showToast('Multiple file upload not supported');
@@ -56,7 +59,7 @@ browseBtn.addEventListener('click', (e) => {
 
 fileInput.addEventListener('change', () => {
     if (fileInput.files[0].size > maxAllowedSize) {
-        showToast("Max file size is 50MB")
+        showToast("Max file size is 100MB")
         fileInput.value = ""
         return
     }
@@ -113,7 +116,6 @@ const onFileUploadSuccess = (res) => {
     }, 300);
 };
 
-
 copyURLBtn.addEventListener("click", () => {
     fileURL.select();
     document.execCommand("copy");
@@ -143,12 +145,12 @@ emailForm.addEventListener("submit", (e) => {
     };
 
     fetch('/api/files/sendmail', {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json",
-            },
-            body: JSON.stringify(formData),
-        })
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json",
+        },
+        body: JSON.stringify(formData),
+    })
         .then((res) => res.json())
         .then((data) => {
             if (data.success) {
@@ -168,6 +170,7 @@ emailForm.addEventListener("submit", (e) => {
         })
 });
 
+
 let toastTimer;
 const showToast = (msg) => {
     clearTimeout(toastTimer);
@@ -177,3 +180,7 @@ const showToast = (msg) => {
         toast.classList.remove("show");
     }, 3000);
 };
+
+goBackBtn.addEventListener('click', (e) => {
+    window.location.href = '/'
+})

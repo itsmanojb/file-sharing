@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>FileShare - Uploaded Files</title>
+
+  <link rel="apple-touch-icon" href="/apple-icon.png">
+  <link rel="icon" type="image/png" href="/favicon.png">
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
+  <link rel="stylesheet" href="/css/style.min.css">
+</head>
+
+<body>
+  <section class="files-container">
+    <div id="content">
+      <div class="card files-list">
+        <header class="card-header">
+          <p class="card-header-title" style="padding-left: 0.5rem;">
+            Uploaded Files (<%= locals.totalSize %>)
+          </p>
+          <a href="<%= locals.cLink %>" class="card-header-icon" title="Clean Up" aria-label="more options"
+            id="cleanup">
+            <span class="icon">
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                stroke="currentColor" class="w-6 h-6">
+                <path stroke-linecap="round" stroke-linejoin="round"
+                  d="M14.74 9l-.346 9m-4.788 0L9.26 9m9.968-3.21c.342.052.682.107 1.022.166m-1.022-.165L18.16 19.673a2.25 2.25 0 01-2.244 2.077H8.084a2.25 2.25 0 01-2.244-2.077L4.772 5.79m14.456 0a48.108 48.108 0 00-3.478-.397m-12 .562c.34-.059.68-.114 1.022-.165m0 0a48.11 48.11 0 013.478-.397m7.5 0v-.916c0-1.18-.91-2.164-2.09-2.201a51.964 51.964 0 00-3.32 0c-1.18.037-2.09 1.022-2.09 2.201v.916m7.5 0a48.667 48.667 0 00-7.5 0" />
+              </svg>
+            </span>
+          </a>
+        </header>
+        <table class="table is-fullwidth" style="margin-bottom: 0;">
+          <thead>
+            <tr>
+              <th>File Name</th>
+              <th>Size</th>
+              <!-- <th>Recipients</th> -->
+              <th>Uploaded</th>
+            </tr>
+          </thead>
+          <tbody>
+            <% locals.files.forEach(function(file, i) { %>
+              <tr>
+                <td>
+                  <%= file.filename %>
+                </td>
+                <td>
+                  <%= file.size %>
+                </td>
+                <!-- <td>
+                  <div class="recipients">
+                    <%= file.recipients.join(', ') %>
+                  </div>
+                </td> -->
+                <td>
+                  <%= file.uploaded %>
+                </td>
+
+              </tr>
+              <% }); %>
+          </tbody>
+        </table>
+        <div class="card-footer px-2 py-5">
+          <p>Total uploaded files: <strong>
+              <%= locals.files.length %>
+            </strong></p>
+        </div>
+      </div>
+    </div>
+    <div id="restriction" class="block-message">
+      <h4>Access Denied!</h4>
+      <p>Contents of this page is restricted.</p>
+
+      <button onclick="gotoHome()">Go to Home</button>
+    </div>
+  </section>
+  <script>
+    function askCode() {
+      let code = prompt("Please enter High Security Code:");
+      if (code == null || code == "") {
+        alert('Please enter code');
+      } else {
+        if (code != '<%=locals.code%>') {
+          alert('Incorrect Code!');
+        } else {
+          const alertBox = document.querySelector('#restriction');
+          const contentBox = document.querySelector('#content');
+          alertBox.style.display = 'none';
+          contentBox.style.display = 'block';
+        }
+      }
+    }
+    askCode();
+    function gotoHome() {
+      window.location.href = '/'
+    }
+  </script>
+</body>
+
+</html>
