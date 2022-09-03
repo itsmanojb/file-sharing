@@ -4,11 +4,13 @@ const progressBar = document.querySelector('#progressBar');
 const postUploadView = document.querySelector('.postupload-ui');
 const anims = document.querySelectorAll('.will-fade-in');
 const statusText = document.querySelector('.complete-text');
+const qrcode = document.querySelector('#qrcode');
 
 const dropzone = document.querySelector('.dropzone');
 const fileInput = document.getElementById('fileInput');
 const browseBtn = document.getElementById('fileSelectBtn');
 
+const qrImg = document.querySelector("#qrCodeSrc");
 const sharingContainer = document.querySelector(".sharing-container");
 const copyURLBtn = document.getElementById("copyURLBtn");
 const fileURL = document.getElementById("fileURL");
@@ -102,24 +104,34 @@ const uploadFile = () => {
 const onFileUploadSuccess = (res) => {
     fileInput.value = ""
     const {
-        file: url
-    } = JSON.parse(res)
+        file: url,
+        qr
+    } = JSON.parse(res);
     fileURL.value = url;
 
     uploadView.style.display = 'none';
     progressView.style.display = 'none';
     postUploadView.style.display = 'flex';
     statusText.innerText = 'Upload completed!';
+    if (qr) {
+        qrImg.src = qr;
+
+        setTimeout(() => {
+            qrcode.style.display = 'flex';
+            const checkmark = document.querySelectorAll('.check-icon');
+            checkmark.forEach(el => el.style.display = 'none');
+        }, 2500);
+    }
 
     setTimeout(() => {
-        anims.forEach(el => el.classList.add('fade-in'))
+        anims.forEach(el => el.classList.add('fade-in'));
     }, 300);
 };
 
 copyURLBtn.addEventListener("click", () => {
     fileURL.select();
     document.execCommand("copy");
-    showToast("Copied to clipboard");
+    showToast("Download link copied to clipboard");
 });
 
 fileURL.addEventListener("click", () => {

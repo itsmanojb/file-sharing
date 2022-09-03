@@ -54,7 +54,7 @@ html {
   background-color: var(--bg-color);
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen,
     Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
-  overflow: hidden;
+  overflow-x: hidden;
 }
 
 strong {
@@ -63,10 +63,27 @@ strong {
 
 .upload-container {
   display: flex;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
   height: 100%;
   width: 100%;
+}
+
+.upload-container > small {
+  color: var(--text-color-muted);
+  padding: 8px;
+  font-weight: 400;
+  margin-bottom: 4px;
+}
+
+.upload-container small span {
+  font-weight: 600;
+}
+
+.upload-container small a {
+  color: var(--app-color-hover);
+  text-decoration: none;
 }
 
 .dropzone {
@@ -152,12 +169,13 @@ strong {
   bottom: 0;
   z-index: 1;
   display: none;
+  padding: 0 20px;
 }
 
 .progress-bar {
   border-radius: 60px;
   overflow: hidden;
-  width: 100%;
+  width: calc(100% - 40px);
 }
 
 .progress-bar span {
@@ -193,10 +211,10 @@ strong {
 .postupload-ui {
   height: 100%;
   width: 100%;
-  display: flex;
   align-items: center;
   justify-content: center;
   display: none;
+  min-height: 720px;
 }
 
 .postupload-ui .wrapper {
@@ -387,6 +405,37 @@ strong {
   text-transform: uppercase;
 }
 
+.qr-wrapper {
+  display: none;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  color: var(--text-color);
+  font-size: 16px;
+  text-align: center;
+}
+
+.qr-wrapper small {
+  display: block;
+  margin: 0.5rem 0;
+  font-size: 12px;
+  color: var(--text-color-muted);
+}
+
+.qr-wrapper .code {
+  border-radius: 10px;
+  height: 190px;
+  width: 190px;
+  padding: 5px;
+  background: #fff;
+}
+
+.qr-wrapper img {
+  height: 100%;
+  width: 100%;
+  object-fit: contain;
+}
+
 .share-link {
   display: flex;
   flex-direction: column;
@@ -395,18 +444,20 @@ strong {
 }
 
 .share-link input {
-  width: 100%;
+  /* width: 100%;
   text-align: center;
   padding: 15px 0;
   border: none;
-  /* border-bottom: 1px solid var(--light-border-color); */
-  /* box-shadow: 0 1px 1px rgba(0, 0, 0, 0.075); */
   background-color: transparent;
   font-family: inherit;
   font-size: 16px;
   margin: 10px 0 5px;
   border-radius: 0;
   color: var(--text-color);
+  overflow: hidden;
+  text-overflow: ellipsis; */
+  opacity: 0;
+  height: 0;
 }
 
 .share-link input:focus {
@@ -415,6 +466,11 @@ strong {
 
 .share-link .btns {
   margin: 5px 0;
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 5px;
 }
 
 .share-link button {
@@ -423,7 +479,7 @@ strong {
   cursor: pointer;
   background-color: transparent;
   transition: all 0.2s ease-in;
-  margin: 0 2px;
+  width: 150px;
 }
 
 .share-link button:hover {
@@ -431,22 +487,28 @@ strong {
 }
 
 .share-link button span {
-  display: block;
-  height: 50px;
-  width: 50px;
+  height: 48px;
+  width: 100%;
   filter: var(--button-filter);
-  text-indent: -99999px;
   opacity: 0.6;
+  display: flex;
+  align-items: center;
+  padding-left: 50px;
+  text-transform: uppercase;
+  font-weight: 600;
+  font-size: 13px;
 }
 
 .share-link button.copy span {
-  background: url('../img/copy.svg') no-repeat center;
-  background-size: 22px;
+  background: url('../img/copy.svg') no-repeat;
+  background-size: 18px;
+  background-position: 20px center;
 }
 
 .share-link button.mail span {
-  background: url('../img/mail.svg') no-repeat center;
-  background-size: 22px;
+  background: url('../img/mail.svg') no-repeat;
+  background-size: 18px;
+  background-position: 20px center;
 }
 
 .email-form {
@@ -472,6 +534,15 @@ strong {
   height: 48px;
 }
 
+.email-form .btns {
+  margin: 16px 0;
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 4px;
+}
+
 @media screen and (max-width: 520px) {
   .email-form {
     padding-left: 0;
@@ -479,7 +550,8 @@ strong {
   }
 
   .email-form input {
-    width: 90%;
+    width: 100%;
+    margin-block: 2px;
   }
 }
 
@@ -489,11 +561,10 @@ strong {
 }
 
 .email-form button {
-  width: 150px;
+  min-width: 150px;
   padding: 15px 30px;
   line-height: 1;
   border-radius: 30px;
-  margin: 10px auto;
   border: 1px solid var(--app-color);
   height: 48px;
   font-weight: 600;
@@ -503,6 +574,7 @@ strong {
   cursor: pointer;
   color: #fff;
   transition: all 0.2s ease-in;
+  flex: 1;
 }
 
 .email-form button:hover {
@@ -646,7 +718,7 @@ strong {
 
 .table td,
 .table th {
-  border-color:var(--light-border-color);
+  border-color: var(--light-border-color);
 }
 
 .table thead td,

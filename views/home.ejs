@@ -31,7 +31,7 @@
   <link rel="icon" type="image/png" href="/favicon.png">
   <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico">
 
-  <link rel="stylesheet" href="/css/style.min.css">
+  <link rel="stylesheet" href="/css/style.css">
 </head>
 
 <body>
@@ -44,10 +44,12 @@
           <img src="/img/file.png" class="right" alt="">
         </div>
         <input type="file" id="fileInput">
-        <div class="text">Drop your files here <small>or</small> <span role="button" id="fileSelectBtn">Browse</span>
+        <div class="text">Drop your file here <small>or</small>
+          <span role="button" id="fileSelectBtn">Select file</span>
         </div>
       </div>
     </div>
+    <small> <span>FileShare</span> by <a href="https://manojbarman.in" target="_blank">Manoj B</a></small>
   </section>
   <section class="uploader-progress-ui">
     <div class="progress-bar">
@@ -58,7 +60,7 @@
   </section>
   <section class="postupload-ui">
     <div class="wrapper">
-      <div class="checkmark">
+      <div class="checkmark check-icon">
         <svg xmlns="http://www.w3.org/2000/svg" class="svg-success" viewBox="0 0 24 24">
           <g stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10">
             <circle class="success-circle-outline" cx="12" cy="12" r="11.5" />
@@ -67,19 +69,30 @@
           </g>
         </svg>
       </div>
-      <div class="complete-text will-fade-in"></div>
+      <div class="complete-text will-fade-in check-icon"></div>
       <div class="share-link will-fade-in anim-delay-1">
+        <div id="qrcode" class="qr-wrapper">
+          <div class="code">
+            <img id="qrCodeSrc">
+          </div>
+          <div class="text">Scan QR code to download file</div>
+          <small>OR</small>
+        </div>
         <input type="text" id="fileURL" readonly value="Here's the file link">
         <div class="btns">
-          <button type="button" title="Copy" class="copy" id="copyURLBtn"><span>copy</span></button>
-          <button type="button" title="Email" class="mail" id="emailBtn"><span>mail</span></button>
+          <button type="button" title="Copy" class="copy" id="copyURLBtn">
+            <span>Copy Link</span>
+          </button>
+          <button type="button" title="Email" class="mail" id="emailBtn">
+            <span>Email Link</span>
+          </button>
         </div>
       </div>
       <form id="mailForm" method="POST">
         <div class="email-form" id="emailForm">
           <input type="email" autocomplete="off" name="mail_to" id="emailTo" placeholder="Recipient's email" required>
           <input type="email" autocomplete="off" name="mail_from" id="emailFrom" placeholder="Your email" required>
-          <div style="margin-top: 1rem;">
+          <div class="btns">
             <button type="submit" id="emailSendBtn"><span>Send</span></button>
             <button type="button" id="goBackBtn" style="background-color: transparent;"><span>Done</span></button>
           </div>
