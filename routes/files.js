@@ -4,6 +4,7 @@ const {
   v4: uuid4
 } = require('uuid')
 const path = require('path')
+const qr = require("qrcode")
 const File = require('../models/file')
 
 let storage = multer.diskStorage({
@@ -43,10 +44,14 @@ router.post('/', (req, res) => {
       size: req.file.size
     })
 
-    const response = await file.save()
-    return res.status(200).json({
-      file: `${process.env.APP_BASE_URL}/files/${response.uuid}`
-    })
+    const response = await file.save();
+    const fileUrl = `${process.env.APP_BASE_URL}/files/${response.uuid}`;
+    qr.toDataURL(fileUrl, (err, src) => {
+      return res.status(200).json({
+        file: fileUrl,
+        qr: err ? null : src
+      });
+    });
 
   })
 })
