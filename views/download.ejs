@@ -25,7 +25,7 @@
       <!-- <div class="icon"></div> -->
       <h4>Ready for download!</h4>
       <p>Download link will expire in 24 hours after it's shared for the first time.</p>
-      <a class="btn" href="<%= downloadLink %>">Download (<%= parseInt(size/1000) %> KB) </a>
+      <a class="btn" href="<%= downloadLink %>">Download (<%= parseInt(size/1000).toLocaleString() %> KB) </a>
       <% }%>
     </div>
   </section>
