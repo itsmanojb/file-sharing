@@ -25,18 +25,18 @@ let upload = multer({
 router.post('/', (req, res) => {
 
   upload(req, res, async (err) => {
-
+    if (err) {
+      return res.status(500).send({
+        error: err.message
+      })
+    }
+    
     if (!req.file) {
       return res.status(400).json({
         error: 'File missing'
       })
     }
 
-    if (err) {
-      return res.status(500).send({
-        error: err.message
-      })
-    }
     const file = new File({
       filename: req.file.filename,
       uuid: uuid4(),
